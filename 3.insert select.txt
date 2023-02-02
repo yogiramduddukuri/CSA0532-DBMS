@@ -1,0 +1,54 @@
+mysql> create database bikes;
+mysql> use bikes;
+Database changed
+mysql> create table student_details(std_name varchar(20),phone_no int(10),subject varchar(25),department varchar(20));
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> desc student_details;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| std_name   | varchar(20) | YES  |     | NULL    |       |
+| phone_no   | int(10)     | YES  |     | NULL    |       |
+| subject    | varchar(25) | YES  |     | NULL    |       |
+| department | varchar(20) | YES  |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+4 rows in set (0.01 sec)
+
+mysql>
+mysql> insert into student_details values("rakesh",785687,"maths","cse");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into student_details values("siddu",897547584,"physics","cse");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into student_details values("chaitanya",978658,"chemistry","cse");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from student_details;
++-----------+-----------+-----------+------------+
+| std_name  | phone_no  | subject   | department |
++-----------+-----------+-----------+------------+
+| rakesh    |    785687 | maths     | cse        |
+| siddu     | 897547584 | physics   | cse        |
+| chaitanya |    978658 | chemistry | cse        |
++-----------+-----------+-----------+------------+
+3 rows in set (0.00 sec)
+
+mysql> select rakesh from student_details;
+ERROR 1054 (42S22): Unknown column 'rakesh' in 'field list'
+mysql> select name from student_details;
+ERROR 1054 (42S22): Unknown column 'name' in 'field list'
+mysql> select from student_details
+    -> select from student_details;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'from student_details
+select from student_details' at line 1
+mysql> select subject from student_details;
++-----------+
+| subject   |
++-----------+
+| maths     |
+| physics   |
+| chemistry |
++-----------+
+3 rows in set (0.00 sec)
