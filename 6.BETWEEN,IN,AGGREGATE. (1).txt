@@ -1,0 +1,81 @@
+mysql> select * from marks;
++-------+---------------------+-----------+-------+-------+
+| sl_no | Name_of_the_student | subject   | Marks | Section|
++-------+---------------------+-----------+-------+-------+
+|     1 | Siddu               |  english  |    95 | A    |
+|     2 | Ram                 | physics   |    88 | A    |
+|     3 | Abhi                | maths     |    75 | B    |
+|     4 | Manoj                chemistry  |    87 | B    |
++-------+---------------------+-----------+-------+-------+
+4 rows in set (0.02 sec)
+
+mysql> select *from marks
+    -> where subject IN('english','maths');
++-------+---------------------+---------+-------+-------+
+| sl_no | Name_of_the_student | subject | Marks | Section|
++-------+---------------------+---------+-------+-------+
+|     1 | Siddu              | english |    95  | A    |
+|     3 | Abhi               | maths   |    75   B     |
++-------+---------------------+---------+-------+-------+
+2 rows in set (0.00 sec)
+
+mysql> select*from marks
+    -> where subject BETWEEN 'chemistry' AND 'maths';
++-------+---------------------+-----------+-------+-------+
+| sl_no | Name_of_the_student | subject   | Marks | Section |
++-------+---------------------+-----------+-------+-------+
+|     1 | Siddu               | english   |    95 | A     |
+|     2 |Abhi                 | maths     |    75 | B     |
+|     3 |manoj                | chemistry |    87 | B     |
++-------+---------------------+-----------+-------+-------+
+3 rows in set (0.02 sec)
+
+
+mysql> select*from marks
+    -> where subject NOT BETWEEN 'chemistry' AND 'maths';
++-------+---------------------+---------+-------+-------+
+| sl_no | Name_of_the_student | subject | Marks | Section |
++-------+---------------------+---------+-------+-------+
+|     1 | Ram                 | physics |    88 | A     |
++-------+---------------------+---------+-------+-------+
+1 row in set (0.00 sec)
+
+mysql> select count(subject) from marks;
++----------------+
+| count(subject) |
++----------------+
+|              4 |
++----------------+
+1 row in set (0.00 sec)
+
+mysql> select sum(marks)as total_sum from marks;
++-----------+
+| total_sum |
++-----------+
+|       375 |
++-----------+
+1 row in set (0.00 sec)
+
+mysql> select max(marks)from marks;
++------------+
+| max(marks) |
++------------+
+|         95 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select min(marks)from marks;
++------------+
+| min(marks) |
++------------+
+|         75 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select avg(marks) from marks;
++------------+
+| avg(marks) |
++------------+
+|    88.2500 |
++------------+
+1 row in set (0.00 sec)
