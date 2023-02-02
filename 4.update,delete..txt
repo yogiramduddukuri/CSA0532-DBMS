@@ -1,0 +1,46 @@
+mysql> select * from marks;
++-------+---------------------+-----------+-------+-------+
+| sl_no | Name_of_the_student | subject    | Marks | Section|
++-------+---------------------+-----------+-------+-------+
+|     1 | siddu                | english     |    95 | A    |
+|     2 | Ram                  | physics     |    88 | A    |
+|     3 | abhi                 | maths       |    75 | B    |
+|     4 | manoj                |chemistry    |    87 | B    |
++-------+---------------------+-----------+-------+-------+
+4 rows in set (0.08 sec)
+
+mysql> select subject from marks;
++-----------+
+| subject   |
++-----------+
+| dbms      |
+| physics   |
+| maths     |
+| chemistry |
++-----------+
+4 rows in set (0.00 sec)
+
+mysql> select * from marks where sl_no=2;
++-------+---------------------+---------+-------+-------+
+| sl_no | Name_of_the_student | subject | Marks | Grade |
++-------+---------------------+---------+-------+-------+
+|     2 | Ram               | physics   |    88 | B     |
++-------+---------------------+---------+-------+-------+
+1 row in set (0.16 sec)
+
+mysql> select *from marks where section='A';
++-------+---------------------+---------+-------+-------+
+| sl_no | Name_of_the_student | subject | Marks | Grade |
++-------+---------------------+---------+-------+-------+
+|     1 | siddu               | english |    99 | A     |
+|     1 | Ram                 | physics |    89 | A     |
++-------+---------------------+---------+-------+-------+
+2 rows in set (0.00 sec)
+
+mysql> select sum(marks)as total_marks from marks;
++-------------+
+| total_marks |
++-------------+
+|         375 |
++-------------+
+1 row in set (0.06 sec)
