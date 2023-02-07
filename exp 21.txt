@@ -1,0 +1,73 @@
+mysql> select*from Employee1;
++--------+----------+------------+------------+--------+-----------+------------+---------------+---------+
+| Emp_id | Emp_name | DOB        | DOJ        | Salary | Address   | Experience | Dept          | Dept_no |
++--------+----------+------------+------------+--------+-----------+------------+---------------+---------+  	   
+|    100 | balaji   | 2003-04-24 | 2022-07-18 | 100000 | khajipet  |         10 | Manufacturing |         |
+|    101 | monii    | 2005-01-29 | 2022-11-23 | 150000 | tirupathi1|          5 | HR            |       2 |		
+|    102 | geethika | 2004-10-19 | 2021-10-23 | 150000 | tirupathi2|          9 | Manufacturing |       3 |
+|    103 | raghu    | 2004-12-04 | 2022-10-25 | 150000 | kadapa    |          2 | Sales         |       1 |
+|    104 | thosh    | 2005-10-16 | 2019-07-18 | 102000 | tirupathi3|          5 | Accounts      |       4 |
++--------+----------+------------+------------+--------+-----------+------------+---------------+---------+ 
+5 rows in set (0.00 sec)
+mysql> select*from edept;
++---------+---------------+-----------------+
+| Dept_no | Dept_name     | No_of_employees |
++---------+---------------+-----------------+
+|       1 | Sales         |              30 |
+|       2 | HR            |              10 |
+|       3 | Manufacturing |              40 |
+|       4 | Accounts      |              20 |
+|       5 | Maintenance   |              50 |
++---------+---------------+-----------------+
+5 rows in set (0.00 sec)
+
+mysql> select Emp_name,DOB from Employee1 where DOB>='2004/01/01';
++----------+------------+
+| Emp_name | DOB        |
++----------+------------+
+| Geethika | 2004-10-10 |
+| raghu    | 2004-12-04 | 
++----------+------------+
+2 rows in set, 1 warning (0.01 sec)
+
+mysql> select*from edept;
++---------+---------------+-----------------+
+| Dept_no | Dept_name     | No_of_employees |
++---------+---------------+-----------------+
+|       1 | Sales         |              30 |
+|       2 | HR            |              10 |
+|       3 | Manufacturing |              40 |
+|       4 | Accounts      |              20 |
+|       5 | Maintenance   |              50 |
++---------+---------------+-----------------+
+5 rows in set (0.00 sec)
+mysql> select  e.Emp_name,e.DOB,d.Dept_no,d.Dept_name from Employee1 e inner join edept d on e.Dept_no=d.Dept_no;
++----------+------------+---------+---------------+
+| Emp_name | DOB        | Dept_no | Dept_name     |
++----------+------------+---------+---------------+
+| monii    | 2005-01-29 |       1 | Sales         |
+| thosh    | 2005-10-16 |       2 | HR            |
+| geethika | 2004-10-19 |       3 | Manufacturing |
+| raghu    | 2004-12-04 |       3 | Manufacturing |
+| balaji   | 2003-04-24 |       4 | Accounts      |
++----------+------------+---------+---------------+
+5 rows in set (0.01 sec)
+mysql> select Emp_name,Emp_id from Employee1 where Dept_no=3;
++----------+--------+
+| Emp_name | Emp_id |
++----------+--------+
+| balaji   |    100 |
+| geethika |    102 |
++----------+--------+
+2 rows in set (0.00 sec)
+mysql> select  e.Emp_name,d.Dept_no,d.Dept_name from Employee1 e inner join edept d on e.Dept_no=d.Dept_no;
++----------+---------+---------------+
+| Emp_name | Dept_no | Dept_name     |
++----------+---------+---------------+
+| monii    |       1 | Sales         |
+| thosh    |       2 | HR            |
+| geethika |       3 | Manufacturing |
+| raghu    |       3 | Manufacturing |
+| balaji   |       4 | Accounts      |
++----------+---------+---------------+
+5 rows in set (0.00 sec)

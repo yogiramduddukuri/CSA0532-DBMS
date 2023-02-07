@@ -1,0 +1,145 @@
+Enter password: *****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 42
+Server version: 5.5.62 MySQL Community Server (GPL)
+
+Copyright (c) 2000, 2018, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> use sse;
+Database changed
+mysql> show tables;
++---------------+
+| Tables_in_sse |
++---------------+
+| employee      |
+| faculty       |
+| mentees       |
+| mentees1      |
+| student       |
+| studepartment |
++---------------+
+6 rows in set (0.00 sec)
+
+mysql> select*from mentees;
++-----------+----------+------+------------+---------+-------+
+| regno     | name     | dept | fathername | subject | marks |
++-----------+----------+------+------------+---------+-------+
+| 192211280 | goutham  | ece  | krishna    | NULL    |    93 |
+| 192211280 | goutham  | ece  | krishna    | NULL    |    93 |
+| 192211281 | geethika | cse  | prasad     | dbms    |    95 |
+| 192211291 | raghu    | cse  | ram        | dbms    |    95 |
+| 192211283 | balaji   | bme  | narayana   | pom     |    99 |
+| 192220546 | moni     | bme  | narayana   | pom     |    99 |
++-----------+----------+------+------------+---------+-------+
+6 rows in set (0.00 sec)
+
+mysql> create table Bdept(deptid int(10),deptname varchar(20),rollno int(10));
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> insert into Bdept values(1,"bj",66);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into Bdept values(2,"moni",67);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into Bdept values(3,"geethi",68);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into Bdept values(4,"raghu",69);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> select*from Bdept;
++--------+----------+--------+
+| deptid | deptname | rollno |
++--------+----------+--------+
+|      1 | bj       |     66 |
+|      2 | moni     |     67 |
+|      3 | geethi   |     68 |
+|      4 | raghu    |     69 |
++--------+----------+--------+
+4 rows in set (0.00 sec)
+
+mysql> update mdept set deptname="cse" where rollno=66;
+ERROR 1146 (42S02): Table 'sse.mdept' doesn't exist
+mysql> update Bdept set deptname="cse" where rollno=66;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update Bdept set deptname="cse" where rollno=67;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update Bdept set deptname="ece";
+Query OK, 4 rows affected (0.01 sec)
+Rows matched: 4  Changed: 4  Warnings: 0
+
+mysql> update Bdept set deptname="bme";
+Query OK, 4 rows affected (0.01 sec)
+Rows matched: 4  Changed: 4  Warnings: 0
+
+mysql> select*from Bdept;
++--------+----------+--------+
+| deptid | deptname | rollno |
++--------+----------+--------+
+|      1 | bme      |     66 |
+|      2 | bme      |     67 |
+|      3 | bme      |     68 |
+|      4 | bme      |     69 |
++--------+----------+--------+
+4 rows in set (0.00 sec)
+
+mysql> select deptid,deptname from Bdept,mentees where mentees.regno=Bdept.rollno;
+Empty set (0.00 sec)
+
+mysql> select rollno,deptname,name from Bdept left outer join mentees on Bdept.rollno=mentees.regno;
++--------+----------+------+
+| rollno | deptname | name |
++--------+----------+------+
+|     66 | bme      | NULL |
+|     67 | bme      | NULL |
+|     68 | bme      | NULL |
+|     69 | bme      | NULL |
++--------+----------+------+
+4 rows in set (0.00 sec)
+
+mysql> insert into Bdept values(5,"eec",90);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into Bdept values(6,"cec",91);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select*from Bdept;
++--------+----------+--------+
+| deptid | deptname | rollno |
++--------+----------+--------+
+|      1 | bme      |     66 |
+|      2 | bme      |     67 |
+|      3 | bme      |     68 |
+|      4 | bme      |     69 |
+|      5 | eec      |     90 |
+|      6 | cec      |     91 |
++--------+----------+--------+
+6 rows in set (0.00 sec)
+
+mysql> select rollno,deptname,name from Bdept right outerjoin mentees on Bdept.rollno=mentees.regno;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'outerjoin mentees on Bdept.rollno=mentees.regno' at line 1
+mysql> select rollno,deptname,name from Bdept right outer join mentees on Bdept.rollno=mentees.regno;
++--------+----------+----------+
+| rollno | deptname | name     |
++--------+----------+----------+
+|   NULL | NULL     | goutham  |
+|   NULL | NULL     | goutham  |
+|   NULL | NULL     | geethika |
+|   NULL | NULL     | raghu    |
+|   NULL | NULL     | balaji   |
+|   NULL | NULL     | moni     |
++--------+----------+----------+
+6 rows in set (0.00 sec)
+
+mysql>
